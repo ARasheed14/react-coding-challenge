@@ -11,7 +11,8 @@ constructor(props) {
       searchResults: [],
       sortBy: "descend",
       isLowestId: true,
-      selectedFilter: ''
+      selectedFilter: '',
+      isFirstLoad: true
     };
   };
 
@@ -153,6 +154,17 @@ constructor(props) {
           <div>Search results not found</div>
         }
 
+        { this.state.selectedFilter === '' &&
+          <div>Results: {this.state.searchResults.map((item, index) => (
+            <div className="border" key={index}>
+                <p>FirstName: {item.first_name}</p>
+                <p>LastName: {item.last_name} </p>
+                <p>Email: {item.email} </p>
+            </div>
+            ))}
+          </div>
+        }
+
         { this.state.selectedFilter == 'First Name' &&
           <div>Results: {this.state.searchResults.map((item, index) => (
             <div className="border" key={index}>
@@ -162,12 +174,19 @@ constructor(props) {
           </div>
         }
 
-        { this.state.selectedFilter === '' &&
+        { this.state.selectedFilter == 'Last Name' &&
           <div>Results: {this.state.searchResults.map((item, index) => (
             <div className="border" key={index}>
-                <p>FirstName: {item.first_name}</p>
-                <p>LastName: {item.last_name} </p>
-                <p>Email: {item.email} </p>
+                <p>LastName: {item.last_name}</p>
+            </div>
+            ))}
+          </div>
+        }
+
+        { this.state.selectedFilter == 'Email' &&
+          <div>Results: {this.state.searchResults.map((item, index) => (
+            <div className="border" key={index}>
+                <p>Email: {item.email}</p>
             </div>
             ))}
           </div>
