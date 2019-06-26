@@ -111,13 +111,13 @@ constructor(props) {
     })
   }
 
-  getSelectedFilterValue(selectedFilter) {
-    this.setFilter(selectedFilter);
+  getSelectedFilterValue(selectedDropDownFilter) {
+    this.setFilter(selectedDropDownFilter);
   }
 
-  setFilter(selectedFilter) {
+  setFilter(filterToBeSet) {
     this.setState({
-      selectedFilter: selectedFilter
+      selectedFilter: filterToBeSet
     })
   }
 
@@ -149,18 +149,29 @@ constructor(props) {
                 <input type="submit" value="Submit" />
             </label>
         </form>
-        <div>Results: {this.state.searchResults.map((item, index) => (
-          <div className="border" key={index}>
-             {/* this.state.selectedFilter == 'First Name' &&
-              <p>FirstName: {item.first_name} </p>
-             */ }
-              <p>FirstName: {item.first_name}</p>
-              <p>LastName: {item.last_name} </p>
-              <p>Email: {item.email} </p>
-          </div>
+        { this.state.results === null || this.state.searchText === '' &&
+          <div>Search results not found</div>
+        }
 
-          ))}
-        </div>
+        { this.state.selectedFilter == 'First Name' &&
+          <div>Results: {this.state.searchResults.map((item, index) => (
+            <div className="border" key={index}>
+                <p>FirstName: {item.first_name}</p>
+            </div>
+            ))}
+          </div>
+        }
+
+        { this.state.selectedFilter === '' &&
+          <div>Results: {this.state.searchResults.map((item, index) => (
+            <div className="border" key={index}>
+                <p>FirstName: {item.first_name}</p>
+                <p>LastName: {item.last_name} </p>
+                <p>Email: {item.email} </p>
+            </div>
+            ))}
+          </div>
+        }
         <button className="btn btn-primary" onClick={(event) => {this.onSort(event)}}>Sort</button>
         <button className="btn btn-primary" onClick={() => {this.resetSearchAndFilter()}}>Reset</button>
       </div>
