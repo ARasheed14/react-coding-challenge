@@ -117,7 +117,7 @@ constructor(props) {
 
   setFilter(filterToBeSet) {
     this.setState({
-      selectedFilter: filterToBeSet
+      selectedFilter: filterToBeSet.value
     })
   }
 
